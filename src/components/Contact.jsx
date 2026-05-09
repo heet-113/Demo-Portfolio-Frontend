@@ -23,8 +23,8 @@ const Contact = () => {
     setStatus({ submitting: true, success: false, error: null });
 
     try {
-      // In development, http://localhost:5000/api/contact
-      await axios.post('http://localhost:5000/api/contact', formData);
+      // Using deployed backend on Render
+      await axios.post('https://demo-portfolio-backend.onrender.com/api/contact', formData);
       setStatus({ submitting: false, success: true, error: null });
       setFormData({ name: '', email: '', message: '' });
 
