@@ -1,0 +1,38 @@
+.bg-secondary {
+  /* Slightly different background for alternating sections */
+  background-color: var(--color-bg-secondary);
+  position: relative;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  justify-items: center;
+}
+
+.loading-spinner {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+  color: var(--color-text-light);
+}
+
+.projects-grid > div {
+  width: 100%;
+  max-width: 920px;
+  scroll-snap-align: start;
+}
+
+@media (min-width: 1024px) {
+  .projects-grid {
+    scroll-snap-type: y proximity;
+  }
+}
+
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
