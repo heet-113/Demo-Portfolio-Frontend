@@ -2,6 +2,7 @@ import React from 'react';
 import './Hero.css';
 import { ArrowRight } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import profileImg from '../assets/profileImage.jpeg';
 
 const Hero = () => {
   return (
@@ -35,7 +36,7 @@ const Hero = () => {
 
         <div className="hero-image-container fade-in-up" style={{ animationDelay: '0.2s' }}>
           <div className="hero-image glass-panel" style={{ padding: '0.5rem' }}>
-            <img src="/profileImage.jpeg" alt="Heet Rupapara" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
+            <img src={profileImg} alt="Heet Rupapara" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
           </div>
         </div>
       </div>
