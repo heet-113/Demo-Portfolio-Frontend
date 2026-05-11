@@ -24,7 +24,16 @@ const resolveProjectImage = (image) => {
     .replace(/^public\//, '')
     .replace(/^\//, '');
 
-  return `${import.meta.env.BASE_URL}${normalizedPath}`;
+  const runtimeBase = (() => {
+    if (typeof window === 'undefined') {
+      return import.meta.env.BASE_URL || '/';
+    }
+
+    const base = window.location.pathname.match(/^\/[^/]+\//)?.[0];
+    return base || import.meta.env.BASE_URL || '/';
+  })();
+
+  return `${runtimeBase}${normalizedPath}`;
 };
 
 const ProjectCard = ({ project }) => {
