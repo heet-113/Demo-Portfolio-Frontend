@@ -1,4 +1,3 @@
-import React from 'react';
 import { ExternalLink } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 import './ProjectCard.css';
@@ -8,11 +7,23 @@ const resolveProjectImage = (image) => {
     return 'https://via.placeholder.com/400x250';
   }
 
-  if (/^https?:\/\//i.test(image) || image.startsWith('//')) {
-    return image;
+  const trimmedImage = image.trim();
+
+  if (
+    /^https?:\/\//i.test(trimmedImage) ||
+    trimmedImage.startsWith('//') ||
+    trimmedImage.startsWith('data:') ||
+    trimmedImage.startsWith('blob:')
+  ) {
+    return trimmedImage;
   }
 
-  const normalizedPath = image.startsWith('/') ? image.slice(1) : image;
+  const normalizedPath = trimmedImage
+    .replace(/^\.\//, '')
+    .replace(/^\/public\//, '')
+    .replace(/^public\//, '')
+    .replace(/^\//, '');
+
   return `${import.meta.env.BASE_URL}${normalizedPath}`;
 };
 
