@@ -3,11 +3,24 @@ import { ExternalLink } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 import './ProjectCard.css';
 
+const resolveProjectImage = (image) => {
+  if (!image) {
+    return 'https://via.placeholder.com/400x250';
+  }
+
+  if (/^https?:\/\//i.test(image) || image.startsWith('//')) {
+    return image;
+  }
+
+  const normalizedPath = image.startsWith('/') ? image.slice(1) : image;
+  return `${import.meta.env.BASE_URL}${normalizedPath}`;
+};
+
 const ProjectCard = ({ project }) => {
   return (
     <div className="project-card glass-card">
       <div className="project-image-wrapper">
-        <img src={project.image || 'https://via.placeholder.com/400x250'} alt={project.title} className="project-image" />
+        <img src={resolveProjectImage(project.image)} alt={project.title} className="project-image" />
       </div>
       
       <div className="project-info">
