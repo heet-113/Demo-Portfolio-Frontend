@@ -31,7 +31,11 @@ const resolveProjectImage = (image) => {
     normalizedPath = '/' + normalizedPath;
   }
 
-  return normalizedPath;
+  // Get the base path from import.meta.env (set by Vite)
+  const base = import.meta.env.BASE_URL || '/';
+  
+  // Combine base path with the image path
+  return `${base.replace(/\/$/, '')}${normalizedPath}`;
 };
 
 const ProjectCard = ({ project }) => {
