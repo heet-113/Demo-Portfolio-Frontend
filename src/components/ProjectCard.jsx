@@ -9,6 +9,7 @@ const resolveProjectImage = (image) => {
 
   const trimmedImage = image.trim();
 
+  // Return external URLs as-is
   if (
     /^https?:\/\//i.test(trimmedImage) ||
     trimmedImage.startsWith('//') ||
@@ -18,22 +19,19 @@ const resolveProjectImage = (image) => {
     return trimmedImage;
   }
 
-  const normalizedPath = trimmedImage
-    .replace(/^\.\//, '')
-    .replace(/^\/public\//, '')
-    .replace(/^public\//, '')
-    .replace(/^\//, '');
+  // Handle local paths from public folder
+  // Normalize the path by removing common prefixes
+  let normalizedPath = trimmedImage
+    .replace(/^\.\//, '') // Remove ./
+    .replace(/^\/public\//, '/') // Convert /public/file to /file
+    .replace(/^public\//, '/'); // Convert public/file to /file
 
-  const runtimeBase = (() => {
-    if (typeof window === 'undefined') {
-      return import.meta.env.BASE_URL || '/';
-    }
+  // If path doesn't start with /, add it (for public folder assets)
+  if (!normalizedPath.startsWith('/')) {
+    normalizedPath = '/' + normalizedPath;
+  }
 
-    const base = window.location.pathname.match(/^\/[^/]+\//)?.[0];
-    return base || import.meta.env.BASE_URL || '/';
-  })();
-
-  return `${runtimeBase}${normalizedPath}`;
+  return normalizedPath;
 };
 
 const ProjectCard = ({ project }) => {

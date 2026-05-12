@@ -20,7 +20,7 @@ const Projects = () => {
             _id: '1',
             title: 'E-commerce Platform',
             description: 'A full-stack e-commerce solution with payment gateway integration and admin dashboard.',
-            image: 'https://images.unsplash.com/photo-1557821552-17105176677c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+            image: '/e-commerce.png',
             techStack: ['React', 'Node.js', 'MongoDB', 'Stripe'],
             liveLink: '#',
             githubLink: '#'
